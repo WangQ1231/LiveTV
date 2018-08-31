@@ -28,10 +28,19 @@ public class CachePool {
     }
 
 
-//    public Object getCache(String key){
-//
-//
-//    }
+    public Object getCache(String key){
+        if(!mPool.containsKey(key)){
+            return null;
+        }
+        CacheItem cacheItem = mPool.get(key);
+        if(cacheItem.isTimeOut()){
+            cacheItem.setEntity(null);
+            return null;
+        }
+
+        return cacheItem.getEntity();
+
+    }
 
     public void putCache(String key,Object object){
         putCache(key,object,TIME_OUT);
@@ -50,7 +59,10 @@ public class CachePool {
     }
 
     public void clearCache(String key){
-
+        if(!mPool.containsKey(key)){
+            return;
+        }
+        mPool.remove(key);
     }
 
     public void clearPool(){
