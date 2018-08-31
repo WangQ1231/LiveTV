@@ -1,8 +1,12 @@
 package com.ztj.livetv.fragment;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +14,15 @@ import android.view.ViewGroup;
 
 
 import com.ztj.androidlib.fragment.BaseFragment;
+import com.ztj.livetv.App;
 import com.ztj.livetv.R;
 import com.ztj.livetv.databinding.FragmentHomeBinding;
+import com.ztj.livetv.db.AppDataBase;
+import com.ztj.livetv.db.entity.GameTypeInfo;
+import com.ztj.livetv.persistence.DataRespository;
+import com.ztj.livetv.viewmodel.GameTypeInfosForTabLayoutViewModel;
+
+import java.util.List;
 
 /**
  * DataBinding and Android architecture components
@@ -21,14 +32,42 @@ import com.ztj.livetv.databinding.FragmentHomeBinding;
 public class HomeFragment extends BaseFragment {
 
     private FragmentHomeBinding mHomeBinding;
+    private TabLayout tabLayout;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.d(TAG,"onCreateView");
         mHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home,container,false);
-
+        tabLayout = mHomeBinding.tab;
         return mHomeBinding.getRoot();
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+//        GameTypeInfosForTabLayoutViewModel model = ViewModelProviders.of(this)
+//                                                        .get(GameTypeInfosForTabLayoutViewModel.class);
+//        DataRespository respository = ((App)getActivity().getApplicationContext()).getRepository();
+//        model.init(respository);
+//        subscribeToModel(model);
+    }
 
+//    private void subscribeToModel(GameTypeInfosForTabLayoutViewModel model) {
+//        model.getmGameTypeInfosForTabLayout().observe(this, new Observer<List<GameTypeInfo>>() {
+//            @Override
+//            public void onChanged(@Nullable List<GameTypeInfo> gameTypeInfos) {
+//                if(gameTypeInfos==null || gameTypeInfos.size()==0)return;
+//
+//               for(GameTypeInfo gameTypeInfo:gameTypeInfos){
+//                   tabLayout.addTab(tabLayout.newTab());
+//               }
+//               for(int i=0;i<gameTypeInfos.size();++i){
+//                   TabLayout.Tab tab = tabLayout.getTabAt(i);
+//                   if(tab!=null){
+//                       tab.setText(gameTypeInfos.get(i).getGameTypeName());
+//                   }
+//               }
+//            }
+//        });
+//    }
 }
