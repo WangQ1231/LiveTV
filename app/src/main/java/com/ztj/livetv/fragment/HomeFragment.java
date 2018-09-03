@@ -45,29 +45,33 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        GameTypeInfosForTabLayoutViewModel model = ViewModelProviders.of(this)
-//                                                        .get(GameTypeInfosForTabLayoutViewModel.class);
-//        DataRespository respository = ((App)getActivity().getApplicationContext()).getRepository();
-//        model.init(respository);
-//        subscribeToModel(model);
+        GameTypeInfosForTabLayoutViewModel.Factory factory = new GameTypeInfosForTabLayoutViewModel.Factory(App.getAppInstance());
+        GameTypeInfosForTabLayoutViewModel model = ViewModelProviders.of(this,factory)
+                                                        .get(GameTypeInfosForTabLayoutViewModel.class);
+        subscribeToModel(model);
     }
 
-//    private void subscribeToModel(GameTypeInfosForTabLayoutViewModel model) {
-//        model.getmGameTypeInfosForTabLayout().observe(this, new Observer<List<GameTypeInfo>>() {
-//            @Override
-//            public void onChanged(@Nullable List<GameTypeInfo> gameTypeInfos) {
-//                if(gameTypeInfos==null || gameTypeInfos.size()==0)return;
-//
-//               for(GameTypeInfo gameTypeInfo:gameTypeInfos){
-//                   tabLayout.addTab(tabLayout.newTab());
-//               }
-//               for(int i=0;i<gameTypeInfos.size();++i){
-//                   TabLayout.Tab tab = tabLayout.getTabAt(i);
-//                   if(tab!=null){
-//                       tab.setText(gameTypeInfos.get(i).getGameTypeName());
-//                   }
-//               }
-//            }
-//        });
-//    }
+    private void subscribeToModel(GameTypeInfosForTabLayoutViewModel model) {
+        model.getmGameTypeInfosForTabLayout().observe(this, new Observer<List<GameTypeInfo>>() {
+            @Override
+            public void onChanged(@Nullable List<GameTypeInfo> gameTypeInfos) {
+
+                if(gameTypeInfos==null || gameTypeInfos.size()==0) {
+                    return;
+                }
+
+                Log.e(TAG,gameTypeInfos.toString());
+
+               for(GameTypeInfo gameTypeInfo:gameTypeInfos){
+                   tabLayout.addTab(tabLayout.newTab());
+               }
+               for(int i=0;i<gameTypeInfos.size();++i){
+                   TabLayout.Tab tab = tabLayout.getTabAt(i);
+                   if(tab!=null){
+                       tab.setText(gameTypeInfos.get(i).getGameTypeName());
+                   }
+               }
+            }
+        });
+    }
 }

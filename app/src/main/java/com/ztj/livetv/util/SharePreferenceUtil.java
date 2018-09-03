@@ -16,6 +16,7 @@ public class SharePreferenceUtil {
 
     private volatile static SharePreferenceUtil sInstance = null;
     private final static String LIVETV_SP = "live_tv";
+    private final static String CREATE_TIME = "create_time";
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
 
@@ -33,5 +34,19 @@ public class SharePreferenceUtil {
     public long getLong(String key){
         return preferences.getLong(key,0);
     }
+
+
+    public void putCreateTime(long createTime){
+        putLong(CREATE_TIME,createTime);
+    }
+
+    public long getCreateTime(){
+        return getLong(CREATE_TIME);
+    }
+
+    public boolean isTimeOut(long outTime){
+        return System.currentTimeMillis()-getCreateTime()> outTime;
+    }
+
 
 }
