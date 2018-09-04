@@ -51,7 +51,9 @@ public class AlgorithmUtil {
     }
 
     public static List<GameTypeInfo> getKthofGameTypeInfo(List<GameTypeInfo> list,int k){
-        if(list==null || list.size()==0)return null;
+        if(list==null || list.size()==0) {
+            return null;
+        }
         GameTypeInfo[] arr = list.toArray(new GameTypeInfo[list.size()]);
         return getKthofGameTypeInfo(arr,k);
     }

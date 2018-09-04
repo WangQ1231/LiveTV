@@ -121,7 +121,7 @@ public class DataRespository {
 
 
     /**
-     * 获取主界面TabLayout上面显示的游戏类型
+     * 获取主界面TabLayout上面显示的游戏类型(选取经常读取的几个item作为标题)
      * @return
      */
     public LiveData<List<GameTypeInfo>> getmGameTypeInfosForTabLayout(){
