@@ -1,39 +1,32 @@
 package com.ztj.livetv.viewmodel;
 
-import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
-import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.ztj.livetv.App;
-import com.ztj.livetv.db.AppDataBase;
 import com.ztj.livetv.db.entity.GameTypeInfo;
 import com.ztj.livetv.persistence.DataRespository;
 
 import java.util.List;
 
 /**
- *
- * @author zhoutianjie
- * @date 2018/8/28
+ * Created by zhoutianjie on 2018/9/4.
  */
 
-public class GameTypeInfosForTabLayoutViewModel extends ViewModel {
+public class ClassifyViewModel extends ViewModel {
 
-    private LiveData<List<GameTypeInfo>> mGameTypeInfosForTabLayout;
+    private LiveData<List<GameTypeInfo>> gameTypeInfos;
     private App application;
 
-    public GameTypeInfosForTabLayoutViewModel(App application) {
+    public ClassifyViewModel(App application) {
         this.application = application;
-        mGameTypeInfosForTabLayout = DataRespository.getsInstance(application.getDataBase()).getmGameTypeInfosForTabLayout();
-
+        gameTypeInfos = DataRespository.getsInstance(application.getDataBase()).getGameTypeInfo();
     }
 
-    public LiveData<List<GameTypeInfo>> getmGameTypeInfosForTabLayout() {
-        return mGameTypeInfosForTabLayout;
+    public LiveData<List<GameTypeInfo>> getGameTypeInfos() {
+        return gameTypeInfos;
     }
 
     public static class Factory extends ViewModelProvider.NewInstanceFactory{
@@ -48,7 +41,7 @@ public class GameTypeInfosForTabLayoutViewModel extends ViewModel {
         @NonNull
         @Override
         public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-            return (T)new GameTypeInfosForTabLayoutViewModel(app);
+            return (T)new ClassifyViewModel(app);
         }
     }
 }

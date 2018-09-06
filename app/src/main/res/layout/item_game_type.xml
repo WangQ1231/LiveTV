@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="listener"
+            type="com.ztj.livetv.listener.OnItemGameTypeListener"/>
+        <variable
+            name="gameInfo"
+            type="com.ztj.livetv.db.entity.GameTypeInfo"/>
+    </data>
+    <RelativeLayout
+        android:id="@+id/game_type_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> listener.onclick(gameInfo.gameId)}">
+        <android.support.v7.widget.CardView
+            android:padding="@dimen/dimen_5"
+            android:id="@+id/game_type_cv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_5"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:cardCornerRadius="@dimen/dimen_5"
+            app:cardUseCompatPadding="true"
+            app:cardPreventCornerOverlap="false">
+            <com.ztj.androidlib.ui.SelectableRoundedImageView
+                android:id="@+id/game_type_icon_iv"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                app:sriv_right_top_corner_radius="@dimen/dimen_8"
+                app:sriv_left_top_corner_radius="@dimen/dimen_8"
+                app:sriv_left_bottom_corner_radius="@dimen/dimen_8"
+                app:sriv_right_bottom_corner_radius="@dimen/dimen_8"/>
+
+        </android.support.v7.widget.CardView>
+        <TextView
+            android:layout_below="@id/game_type_cv"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/game_type_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="@{gameInfo.gameTypeName}"
+            />
+    </RelativeLayout>
+</layout>

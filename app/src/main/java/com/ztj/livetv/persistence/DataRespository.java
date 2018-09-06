@@ -87,7 +87,7 @@ public class DataRespository {
         if(nativeCache!=null && nativeCache.size()!=0 && !App.getAppInstance().getSharePreferenceUtil()
                 .isTimeOut(ALL_GAMETYPE_OUT_TIME)){
             Log.e("DataRespository","from memory native");
-            mObserverAllGameTypeInfos.setValue(memoryCache);
+            mObserverAllGameTypeInfos.setValue(nativeCache);
             CachePool.getInstance().putCache(ALL_GAMETYPEINFO_KEY,nativeCache,ALL_GAMETYPE_OUT_TIME);
             return mObserverAllGameTypeInfos;
         }
